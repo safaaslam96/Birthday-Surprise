@@ -58,7 +58,6 @@
       box-shadow: 0 8px 25px rgba(0,0,0,0.6);
     }
 
-    /* Countdown */
     #countdown {
       font-size: 4rem;
       font-weight: bold;
@@ -70,11 +69,8 @@
       to { transform: scale(1); opacity: 1; }
     }
 
-    .hidden {
-      display: none;
-    }
+    .hidden { display: none; }
 
-    /* Glowy surprise text */
     .glow {
       font-size: 2rem;
       font-weight: bold;
@@ -102,7 +98,6 @@
       }
     }
 
-    /* Falling emojis */
     .falling {
       position: fixed;
       top: -50px;
@@ -118,7 +113,6 @@
       }
     }
 
-    /* Fireworks sparks */
     .spark {
       position: absolute;
       width: 8px;
@@ -140,7 +134,7 @@
     <div id="countdown"></div>
 
     <div class="cake hidden" id="cake">
-      <img src="cake.png" alt="Birthday Cake">
+      <img src="assets/cake.png" alt="Birthday Cake">
     </div>
 
     <div class="wish hidden" id="wish">
@@ -150,10 +144,10 @@
   </div>
 
   <!-- Birthday Song -->
-  <audio id="song" src="song.mp3"></audio>
+  <audio id="song" src="assets/song.mp3"></audio>
 
   <!-- Countdown Sound -->
-  <audio id="countdown-sound" src="countdown.mp3"></audio>
+  <audio id="countdown-sound" src="assets/countdown.mp3"></audio>
 
   <script>
     const countdown = document.getElementById("countdown");
@@ -162,9 +156,7 @@
     const song = document.getElementById("song");
     const countdownSound = document.getElementById("countdown-sound");
 
-    window.onload = () => {
-      startCountdown();
-    };
+    window.onload = () => startCountdown();
 
     function startCountdown() {
       let counter = 3;
@@ -172,7 +164,6 @@
 
       const interval = setInterval(() => {
         if (counter > 0) {
-          // Play countdown sound only for 3,2,1
           countdownSound.currentTime = 0;
           countdownSound.play().catch(err => console.log("Audio blocked:", err));
 
@@ -181,11 +172,10 @@
         } else {
           clearInterval(interval);
 
-          // STOP countdown audio completely before showing surprise
+          // Stop countdown sound before surprise
           countdownSound.pause();
           countdownSound.currentTime = 0;
 
-          // Show surprise message WITHOUT countdown audio
           countdown.innerHTML = `<span class="glow">I have a surprise for you 🎁</span>`;
 
           setTimeout(() => {
@@ -200,7 +190,6 @@
       }, 1000);
     }
 
-    // Falling emojis
     function startCelebration() {
       const items = ["🌸","🌹","🌺","🌷","💐","🎊","🎉","✨"];
       setInterval(() => {
@@ -214,7 +203,6 @@
       }, 300);
     }
 
-    // Fireworks loop
     function startFireworks() {
       setInterval(() => {
         for (let i = 0; i < 15; i++) {
@@ -232,4 +220,3 @@
   </script>
 </body>
 </html>
-
