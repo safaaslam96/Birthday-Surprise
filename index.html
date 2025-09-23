@@ -127,11 +127,28 @@
       from { transform: scale(0) translate(0,0); opacity: 1; }
       to { transform: scale(1.5) translate(var(--x), var(--y)); opacity: 0; }
     }
+
+    #startBtn {
+      padding: 15px 30px;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 10px;
+      background: #ff6ec4;
+      color: white;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    #startBtn:hover {
+      background: #f7b733;
+    }
   </style>
 </head>
 <body>
   <div class="card" id="card">
-    <div id="countdown"></div>
+    <button id="startBtn">Click to Celebrate 🎂</button>
+
+    <div id="countdown" class="hidden"></div>
 
     <div class="cake hidden" id="cake">
       <img src="assets/cake.png" alt="Birthday Cake">
@@ -143,10 +160,7 @@
     </div>
   </div>
 
-  <!-- Birthday Song -->
   <audio id="song" src="assets/song.mp3"></audio>
-
-  <!-- Countdown Sound -->
   <audio id="countdown-sound" src="assets/countdown.mp3"></audio>
 
   <script>
@@ -155,8 +169,13 @@
     const wish = document.getElementById("wish");
     const song = document.getElementById("song");
     const countdownSound = document.getElementById("countdown-sound");
+    const startBtn = document.getElementById("startBtn");
 
-    window.onload = () => startCountdown();
+    startBtn.addEventListener("click", () => {
+      startBtn.style.display = "none";
+      countdown.classList.remove("hidden");
+      startCountdown();
+    });
 
     function startCountdown() {
       let counter = 3;
@@ -172,7 +191,6 @@
         } else {
           clearInterval(interval);
 
-          // Stop countdown sound before surprise
           countdownSound.pause();
           countdownSound.currentTime = 0;
 
